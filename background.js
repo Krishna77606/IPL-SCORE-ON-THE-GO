@@ -29,7 +29,7 @@ const getMatchData = async () => {
     const data = await response.json();
     // filter data where matchType is ipl by series id 
 
-    data = data.filter((match) => match.type === 't20' && match.series_id === '76ae85e2-88e5-4e99-83e4-5f352108aebc');
+    data = data.filter((match) => match.type === "t20" && match.series_id === "76ae85e2-88e5-4e99-83e4-5f352108aebc");
 
     console.log(data);
 }
