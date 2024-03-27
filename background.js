@@ -25,11 +25,11 @@ setValues();
 const getMatchData = async () => {
     status.innerHTML = "Fetching Data...";
     venue.innerText = "Fetching Data...";
-    const response = await fetch('https://api.cricapi.com/v1/currentMatches?apikey=bef4b6e4-0fbb-4e11-9410-6e16e2ca5ab1&offset=0');
+    const response = await fetch('https://api.cricapi.com/v1/currentMatches?apikey=6cbb071f-433f-4db0-82f4-1832b9f137b3&offset=0');
     const data = await response.json();
-    // filter data where matchType is t20
+    // filter data where matchType is ipl by series id 
 
-    data = data.filter((match) => match.type === 't20');
+    data = data.filter((match) => match.type === 't20' && match.series_id === '76ae85e2-88e5-4e99-83e4-5f352108aebc');
 
     console.log(data);
 }

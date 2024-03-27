@@ -19,7 +19,7 @@ var next = document.getElementById("next");
 var currentIndex = 0;
 var iplData = {};
 const apiLink =
-  "https://api.cricapi.com/v1/currentMatches?apikey=bef4b6e4-0fbb-4e11-9410-6e16e2ca5ab1&offset=0";
+  "https://api.cricapi.com/v1/currentMatches?apikey=6cbb071f-433f-4db0-82f4-1832b9f137b3&offset=0";
 
 // setValues
 var setValues = (values) => {
