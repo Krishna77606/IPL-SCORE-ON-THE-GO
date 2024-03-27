@@ -1,28 +1,30 @@
-const team_1_code = document.getElementById("team-1-code");
-const team_2_code = document.getElementById("team-2-code");
-const team_1_name = document.getElementById("team-1-name");
-const team_2_name = document.getElementById("team-2-name");
-const team_1_score = document.getElementById("team-1-score");
-const team_2_score = document.getElementById("team-2-score");
-const team_1_logo = document.getElementById("team-1-logo");
-const team_2_logo = document.getElementById("team-2-logo");
-const team_1_overs = document.getElementById("team-1-overs");
-const team_2_overs = document.getElementById("team-2-overs");
-const team_1_wickets = document.getElementById("team-1-wickets");
-const team_2_wickets = document.getElementById("team-2-wickets");
-const date = document.getElementById("date");
-const venue = document.getElementById("venue");
-const statusMessage = document.getElementById("status");
-const headline = document.getElementById("headline");
-const match_status = document.getElementById("match_status");
-const next = document.getElementById("next");
-let currentIndex = 0;
-let iplData = {};
-
+var team_1_code = document.getElementById("team-1-code");
+var team_2_code = document.getElementById("team-2-code");
+var team_1_name = document.getElementById("team-1-name");
+var team_2_name = document.getElementById("team-2-name");
+var team_1_score = document.getElementById("team-1-score");
+var team_2_score = document.getElementById("team-2-score");
+var team_1_logo = document.getElementById("team-1-logo");
+var team_2_logo = document.getElementById("team-2-logo");
+var team_1_overs = document.getElementById("team-1-overs");
+var team_2_overs = document.getElementById("team-2-overs");
+var team_1_wickets = document.getElementById("team-1-wickets");
+var team_2_wickets = document.getElementById("team-2-wickets");
+var date = document.getElementById("date");
+var venue = document.getElementById("venue");
+var statusMessage = document.getElementById("status");
+var headline = document.getElementById("headline");
+var match_status = document.getElementById("match_status");
+var next = document.getElementById("next");
+var currentIndex = 0;
+var iplData = {};
 const apiLink =
   "https://api.cricapi.com/v1/currentMatches?apikey=6cbb071f-433f-4db0-82f4-1832b9f137b3&offset=0";
 
-const setValues = (values) => {
+const iplSeriesId = "76ae85e2-88e5-4e99-83e4-5f352108aebc";
+
+// setValues
+var setValues = (values) => {
   headline.innerHTML = values.name;
   team_1_code.innerHTML = values.teamInfo[0].shortname;
   team_2_code.innerHTML = values.teamInfo[1].shortname;
@@ -46,12 +48,15 @@ const setValues = (values) => {
   }
 };
 
-const getMatchData = async () => {
+// get match data from api
+var getScores = async () => {
   fetch(apiLink)
     .then((response) => response.json())
     .then((data) => {
-      values = data;
-      iplData = values.data;
+      // Filter data to include only IPL matches
+      const iplMatches = data.data.filter(match => match.series_id === iplSeriesId);
+
+      iplData = iplMatches;
       setValues(iplData[0]);
     })
     .catch((error) => {
@@ -60,7 +65,7 @@ const getMatchData = async () => {
     });
 };
 
-getMatchData();
+getScores();
 
 next.addEventListener("click", () => {
   console.log("next clicked");
@@ -70,11 +75,3 @@ next.addEventListener("click", () => {
   }
   setValues(iplData[currentIndex]);
 });
-
-const setDefaultValues = () => {
-  team_1_code.innerHTML = "IND";
-};
-
-console.log("Hello from background.js");
-
-setDefaultValues();
